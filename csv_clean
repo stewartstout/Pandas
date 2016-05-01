@@ -1,0 +1,7 @@
+df = pd.read_csv('/Users/stewartstout/Downloads/anonymisedData/assessments.csv', header='infer')
+df = df.fillna('')
+df.to_csv(path_or_buf='/Users/stewartstout/desktop/assessments.csv', sep=',')
+
+# in Terminal
+
+scp assessments.csv aws:~
