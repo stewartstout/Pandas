@@ -1,0 +1,27 @@
+## the SQL code below creates an AVERAGEIFS function from Excel in SQL in ColZ
+## TableA is the table you want to modify; TableB is the source data
+## In psuedocode, you are executing the following: 
+## - return the average of ColA in TableB 
+## - for rows in which the values of Columns B, C, and D in TableB are the same as those in TableA
+## - and for rows in which the values of Column E in TableB is 'XYZ'
+
+UPDATE TableA
+SET ColZ = alias.avg_ColA
+FROM  
+
+(
+
+		SELECT ColB, ColC, ColD,
+			avg(ColA) as avg_ColA
+		FROM TableB
+		WHERE ColE = 'XYZ'
+		GROUP BY ColB, ColC, ColD
+
+)
+
+as alias
+
+WHERE
+	TableA.ColB = alias.ColB AND
+	TableA.ColC = alias.ColC AND
+	TableA.ColD = alias.ColD;
